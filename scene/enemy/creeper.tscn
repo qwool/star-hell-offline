@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://doe6415cseip"]
+
+[ext_resource type="Script" path="res://scene/enemy/creeper.gd" id="1_6ghfj"]
+[ext_resource type="Script" path="res://scene/enemy/enemy.gd" id="1_6olxq"]
+[ext_resource type="Texture2D" uid="uid://b8aimqshgoq4l" path="res://assets/creeper.png" id="2_r1a7y"]
+[ext_resource type="Script" path="res://component/hp.gd" id="3_0p4a1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql0ds"]
+atlas = ExtResource("2_r1a7y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8x5vf"]
+atlas = ExtResource("2_r1a7y")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eudw1"]
+atlas = ExtResource("2_r1a7y")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xg7fa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ql0ds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8x5vf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eudw1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wahxc"]
+size = Vector2(32, 32)
+
+[node name="Creeper" type="Area2D" groups=["damageable", "enemy"]]
+show_behind_parent = true
+visibility_layer = 2
+script = ExtResource("1_6olxq")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_xg7fa")
+frame_progress = 0.232228
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wahxc")
+
+[node name="HP" type="Node2D" parent="."]
+script = ExtResource("3_0p4a1")
+max_hp = 30
+
+[node name="MobSpecific" type="Node2D" parent="."]
+script = ExtResource("1_6ghfj")
+
+[connection signal="dead" from="HP" to="." method="_on_hp_dead"]

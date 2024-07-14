@@ -1,0 +1,630 @@
+[gd_scene load_steps=33 format=3 uid="uid://d0vfxtywxbf81"]
+
+[ext_resource type="Script" path="res://scene/player.gd" id="1_gc1v4"]
+[ext_resource type="Texture2D" uid="uid://dgg8t11tmqnr8" path="res://assets/player.png" id="2_sntgm"]
+[ext_resource type="Texture2D" uid="uid://bus2nldfffof4" path="res://assets/wheel-of-fortune.png" id="3_4pmun"]
+[ext_resource type="Script" path="res://component/hp.gd" id="3_b6qvu"]
+[ext_resource type="Script" path="res://scene/UpgradeMenu.gd" id="3_hpjqa"]
+[ext_resource type="Texture2D" uid="uid://bxxnrlnm1tqr1" path="res://component/tileset.tres" id="4_e4io1"]
+[ext_resource type="Texture2D" uid="uid://b8u70hevgekrv" path="res://assets/upgrades.png" id="5_iba3h"]
+[ext_resource type="Script" path="res://scene/Hearts.gd" id="7_arwgt"]
+[ext_resource type="Texture2D" uid="uid://cxt8560cx5vux" path="res://assets/floor.png" id="8_7h7bg"]
+[ext_resource type="Theme" uid="uid://c5ncwmine82ia" path="res://assets/global_theme.tres" id="9_ai2ad"]
+[ext_resource type="Texture2D" uid="uid://cc8s8dg5uwqt6" path="res://assets/cursor.png" id="9_qbupm"]
+[ext_resource type="Script" path="res://scene/LightSource.gd" id="11_u3fhw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sekwr"]
+atlas = ExtResource("2_sntgm")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0egu"]
+atlas = ExtResource("2_sntgm")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb26l"]
+atlas = ExtResource("2_sntgm")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tnk0"]
+atlas = ExtResource("2_sntgm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8kigf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sekwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0egu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xb26l")
+}],
+"loop": false,
+"name": &"death",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tnk0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onih7"]
+size = Vector2(16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngrcl"]
+atlas = ExtResource("4_e4io1")
+region = Rect2(16, 22, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3jb3"]
+atlas = ExtResource("4_e4io1")
+region = Rect2(106, 57, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t58lm"]
+font_size = 64
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6hcb"]
+atlas = ExtResource("5_iba3h")
+region = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ybwx"]
+atlas = ExtResource("3_4pmun")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1w0hn"]
+atlas = ExtResource("5_iba3h")
+region = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q6fq"]
+atlas = ExtResource("5_iba3h")
+region = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tood3"]
+atlas = ExtResource("5_iba3h")
+region = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1h3qd"]
+atlas = ExtResource("5_iba3h")
+region = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vdhcr"]
+radius = 64.0
+
+[sub_resource type="Animation" id="Animation_pj67e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bfogm"]
+resource_name = "flash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_04mjh"]
+_data = {
+"RESET": SubResource("Animation_pj67e"),
+"flash": SubResource("Animation_bfogm")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mx0hm"]
+radius = 16.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_gc1v4")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8kigf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_onih7")
+metadata/_edit_group_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+motion_mirroring = Vector2(1920, 1080)
+
+[node name="bg" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("8_7h7bg")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 1920, 1080)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+unique_name_in_owner = true
+
+[node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TimeLabel" type="Label" parent="Camera2D/CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 90.0
+
+[node name="ExpBar" type="TextureProgressBar" parent="Camera2D/CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 60.0
+offset_bottom = 7.0
+scale = Vector2(32, 4.5)
+size_flags_vertical = 0
+mouse_filter = 2
+max_value = 5.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_ngrcl")
+texture_progress = SubResource("AtlasTexture_x3jb3")
+
+[node name="LevelLabel" type="Label" parent="Camera2D/CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 64.0
+grow_horizontal = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeMenu" type="Control" parent="Camera2D/CanvasLayer"]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("3_hpjqa")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Camera2D/CanvasLayer/UpgradeMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -496.0
+offset_top = 244.0
+offset_right = -307.0
+offset_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6, 6)
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("3_4pmun")
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 19, 18)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+
+[node name="UpgradeDescription" type="RichTextLabel" parent="Camera2D/CanvasLayer/UpgradeMenu"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 808.0
+offset_right = 1472.0
+offset_bottom = 968.0
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 3
+theme_override_font_sizes/italics_font_size = 4
+theme_override_font_sizes/bold_italics_font_size = 4
+theme_override_font_sizes/mono_font_size = 4
+bbcode_enabled = true
+text = "speed [color=white]+1%[/color]
+matka nie liubi"
+autowrap_mode = 1
+
+[node name="UpgradeName" type="Label" parent="Camera2D/CanvasLayer/UpgradeMenu"]
+layout_mode = 0
+offset_left = 504.0
+offset_top = 744.0
+offset_right = 864.0
+offset_bottom = 795.0
+text = "ASDASDASDASDASD"
+label_settings = SubResource("LabelSettings_t58lm")
+
+[node name="UpgradeIcon" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu"]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 744.0
+offset_right = 496.0
+offset_bottom = 808.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_f6hcb")
+
+[node name="Wheel" type="Control" parent="Camera2D/CanvasLayer/UpgradeMenu"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 960.0
+offset_top = 256.0
+offset_right = 1344.0
+offset_bottom = 640.0
+
+[node name="Upgrade" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu/Wheel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -64.0
+offset_right = -160.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 2.35619
+scale = Vector2(8, 8)
+pivot_offset = Vector2(-1, -1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_6ybwx")
+
+[node name="Sprite" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu/Wheel/Upgrade"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.92699
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(32, 32)
+texture = SubResource("AtlasTexture_1w0hn")
+
+[node name="Upgrade1" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu/Wheel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -64.0
+offset_right = -160.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.92699
+scale = Vector2(8, 8)
+pivot_offset = Vector2(-1, -1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_6ybwx")
+
+[node name="Sprite" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu/Wheel/Upgrade1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 2.35619
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(32, 32)
+texture = SubResource("AtlasTexture_2q6fq")
+
+[node name="Upgrade2" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu/Wheel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -64.0
+offset_right = -160.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 5.49778
+scale = Vector2(8, 8)
+pivot_offset = Vector2(-1, -1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_6ybwx")
+
+[node name="Sprite" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu/Wheel/Upgrade2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.785397
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(32, 32)
+texture = SubResource("AtlasTexture_tood3")
+
+[node name="Upgrade3" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu/Wheel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -64.0
+offset_right = -160.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.785397
+scale = Vector2(8, 8)
+pivot_offset = Vector2(-1, -1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_6ybwx")
+
+[node name="Sprite" type="TextureRect" parent="Camera2D/CanvasLayer/UpgradeMenu/Wheel/Upgrade3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.785397
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(32, 32)
+texture = SubResource("AtlasTexture_1h3qd")
+
+[node name="Hearts" type="Control" parent="Camera2D/CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_arwgt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Hearts"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 80.0
+scale = Vector2(3, 3)
+
+[node name="PauseMenu" type="Control" parent="Camera2D/CanvasLayer"]
+unique_name_in_owner = true
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UnpauseButton" type="Button" parent="Camera2D/CanvasLayer/PauseMenu/HBoxContainer"]
+layout_mode = 2
+text = "unpause//"
+
+[node name="DeathMenu" type="Control" parent="Camera2D/CanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -106.0
+offset_right = 360.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/DeathMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -46.0
+offset_right = 360.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="Camera2D/CanvasLayer/DeathMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "fuck this"
+
+[node name="Control" type="Control" parent="Camera2D/CanvasLayer/DeathMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="LobbyButton" type="Button" parent="Camera2D/CanvasLayer/DeathMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "lobby"
+
+[node name="Panel" type="Panel" parent="Camera2D/CanvasLayer/DeathMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -360.0
+offset_right = 360.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme = ExtResource("9_ai2ad")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer/DeathMenu/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "* level [30] +300//
+* [500] kills +500//
+* survived [180s] + 180//"
+autowrap_mode = 0
+
+[node name="Effects" type="CanvasLayer" parent="Camera2D/CanvasLayer"]
+unique_name_in_owner = true
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer/Effects"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Clock" type="Timer" parent="."]
+autostart = true
+
+[node name="Hand" type="Node2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("HeartsNode")]
+unique_name_in_owner = true
+script = ExtResource("3_b6qvu")
+max_hp = 3
+hp_lowest = 3
+iframes = 2.08165e-12
+HeartsNode = NodePath("../Camera2D/CanvasLayer/Hearts")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_onih7")
+metadata/_edit_group_ = true
+
+[node name="PickupRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupRange"]
+shape = SubResource("CircleShape2D_vdhcr")
+script = ExtResource("11_u3fhw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_04mjh")
+}
+
+[node name="Cursor" type="Node2D" parent="."]
+top_level = true
+
+[node name="Cursor" type="Sprite2D" parent="Cursor"]
+z_as_relative = false
+texture = ExtResource("9_qbupm")
+
+[node name="Sight" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("CircleShape2D_mx0hm")
+script = ExtResource("11_u3fhw")
+color = Color(1, 1, 1, 0)
+
+[node name="Timer" type="Timer" parent="Sight"]
+autostart = true
+
+[connection signal="upgrade_called" from="." to="Camera2D/CanvasLayer/UpgradeMenu" method="_on_player_upgrade_called"]
+[connection signal="request_upgrade" from="Camera2D/CanvasLayer/UpgradeMenu" to="." method="_on_upgrade_menu_request_upgrade"]
+[connection signal="gui_input" from="Camera2D/CanvasLayer/UpgradeMenu/Wheel" to="Camera2D/CanvasLayer/UpgradeMenu" method="_on_wheel_gui_input"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/PauseMenu/HBoxContainer/UnpauseButton" to="." method="_on_unpause_button_pressed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/DeathMenu/HBoxContainer/LobbyButton" to="." method="_on_lobby_button_pressed"]
+[connection signal="timeout" from="Clock" to="." method="_on_clock_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="damaged" from="Hitbox" to="." method="_on_hitbox_damaged"]
+[connection signal="dead" from="Hitbox" to="." method="_on_hitbox_dead"]
+[connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
+[connection signal="area_exited" from="PickupRange" to="." method="_on_pickup_range_area_exited"]
+[connection signal="item_rect_changed" from="Sight/CollisionShape2D" to="Sight/CollisionShape2D" method="_on_item_rect_changed"]

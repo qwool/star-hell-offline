@@ -1,0 +1,301 @@
+[gd_scene load_steps=22 format=3 uid="uid://88421iv42uhe"]
+
+[ext_resource type="Script" path="res://scene/upgrades_screen.gd" id="1_m0sfy"]
+[ext_resource type="Texture2D" uid="uid://c8n7y8v18qq4q" path="res://assets/transparency.png" id="2_3gltf"]
+[ext_resource type="Texture2D" uid="uid://div7oh6l3xukn" path="res://assets/elements.png" id="2_6awfr"]
+[ext_resource type="Texture2D" uid="uid://t44xlwnrdk83" path="res://assets/tileset.png" id="3_i138k"]
+[ext_resource type="Texture2D" uid="uid://gnci370msykc" path="res://assets/gun-parts.png" id="5_4ogcg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f04s4"]
+atlas = ExtResource("3_i138k")
+region = Rect2(2.08165e-12, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqd2x"]
+atlas = ExtResource("2_6awfr")
+region = Rect2(2.08165e-12, 2.08165e-12, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1efbe"]
+atlas = ExtResource("2_6awfr")
+region = Rect2(32, 2.08165e-12, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc50e"]
+atlas = ExtResource("2_6awfr")
+region = Rect2(64, 2.08165e-12, 32, 64)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q8vo1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q86xv"]
+bg_color = Color(0.054902, 0.0588235, 0.0784314, 0.509804)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4nmv"]
+bg_color = Color(0.054902, 0.0588235, 0.0784314, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jyjfw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nl7vl"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f1bi3"]
+load_path = "res://.godot/imported/gun-parts.png-7a90ae5e5c0b52645ea4f3599c691804.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd0ph"]
+atlas = SubResource("CompressedTexture2D_f1bi3")
+region = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n7bvi"]
+load_path = "res://.godot/imported/gun-parts.png-7a90ae5e5c0b52645ea4f3599c691804.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvxvl"]
+atlas = SubResource("CompressedTexture2D_n7bvi")
+region = Rect2(2.08165e-12, 16, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d4w7r"]
+load_path = "res://.godot/imported/gun-parts.png-7a90ae5e5c0b52645ea4f3599c691804.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdb75"]
+atlas = SubResource("CompressedTexture2D_d4w7r")
+region = Rect2(2.08165e-12, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjl6t"]
+atlas = ExtResource("5_4ogcg")
+region = Rect2(2.08165e-12, 48, 16, 16)
+
+[node name="UpgradesScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m0sfy")
+
+[node name="Background" type="TextureRect" parent="."]
+texture_repeat = 3
+offset_right = 480.0
+offset_bottom = 270.0
+scale = Vector2(4, 4)
+texture = ExtResource("2_3gltf")
+stretch_mode = 1
+
+[node name="PartsBackground" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 44.0
+scale = Vector2(16, 16)
+texture = SubResource("AtlasTexture_f04s4")
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="ElementBackground" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 376.0
+offset_right = 1020.0
+offset_bottom = 420.0
+scale = Vector2(16, 16)
+texture = SubResource("AtlasTexture_f04s4")
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="GunBackground" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_top = 696.0
+offset_right = 32.0
+offset_bottom = 720.0
+scale = Vector2(16, 16)
+texture = SubResource("AtlasTexture_f04s4")
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="PartContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 32.0
+offset_top = 72.0
+offset_right = 99.0
+offset_bottom = 119.0
+scale = Vector2(12, 12)
+
+[node name="Magazine" type="VBoxContainer" parent="PartContainer"]
+layout_mode = 2
+
+[node name="Barrel" type="VBoxContainer" parent="PartContainer"]
+layout_mode = 2
+
+[node name="Hammer" type="VBoxContainer" parent="PartContainer"]
+layout_mode = 2
+
+[node name="Trigger" type="VBoxContainer" parent="PartContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 512.0
+offset_top = -384.0
+offset_right = 960.0
+grow_vertical = 0
+
+[node name="UpgradeExplanation" type="RichTextLabel" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+
+[node name="UpgradeName" type="RichTextLabel" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 552.0
+offset_bottom = 72.0
+theme_override_colors/default_color = Color(0.972549, 0.972549, 0.972549, 1)
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -960.0
+offset_bottom = 384.0
+grow_horizontal = 0
+
+[node name="ClassExplanation" type="RichTextLabel" parent="Panel2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[color=white]/// XI[/color]
+Brutality"
+
+[node name="Points" type="RichTextLabel" parent="Panel2"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 280.0
+offset_bottom = 80.0
+bbcode_enabled = true
+text = "* 100"
+
+[node name="Classes" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -896.0
+offset_top = -696.0
+offset_right = -792.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(8.04, 1)
+
+[node name="XI" type="TextureRect" parent="Classes"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_kqd2x")
+
+[node name="LAMBDA" type="TextureRect" parent="Classes"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1efbe")
+
+[node name="THETA" type="TextureRect" parent="Classes"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_dc50e")
+
+[node name="PlayButton" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 1571.0
+offset_top = 190.0
+offset_right = 1593.0
+offset_bottom = 202.0
+scale = Vector2(16, 16)
+texture = SubResource("AtlasTexture_f04s4")
+region_rect = Rect2(2.08165e-12, 2.08165e-12, 16, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Button" type="Button" parent="PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 51.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_q8vo1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_q86xv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a4nmv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jyjfw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nl7vl")
+text = "GO"
+
+[node name="Gun" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 680.0
+offset_right = -1728.0
+offset_bottom = -285.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+
+[node name="Magazine" type="TextureRect" parent="Gun"]
+layout_mode = 2
+offset_top = 56.0
+offset_right = 64.0
+offset_bottom = 120.0
+texture = SubResource("AtlasTexture_yd0ph")
+
+[node name="Barrel" type="TextureRect" parent="Gun"]
+layout_mode = 2
+offset_left = 66.6667
+offset_top = 8.0
+offset_right = 130.667
+offset_bottom = 72.0
+texture = SubResource("AtlasTexture_kvxvl")
+
+[node name="Hammer" type="TextureRect" parent="Gun"]
+layout_mode = 2
+offset_left = 8.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture = SubResource("AtlasTexture_vdb75")
+
+[node name="Trigger" type="TextureRect" parent="Gun"]
+layout_mode = 2
+offset_left = 50.6667
+offset_top = 37.3333
+offset_right = 114.667
+offset_bottom = 101.333
+texture = SubResource("AtlasTexture_wjl6t")
+
+[connection signal="pressed" from="PlayButton/Button" to="." method="_on_button_pressed"]

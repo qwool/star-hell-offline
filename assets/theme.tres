@@ -1,0 +1,26 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cls1u3xn3jydd"]
+
+[ext_resource type="FontFile" uid="uid://db4kmymq2e4ip" path="res://assets/monogram.ttf" id="1_6ul0q"]
+[ext_resource type="StyleBox" uid="uid://blfxxood2ct6i" path="res://assets/new_style_box_flat.tres" id="1_sf3oy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x68ot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ac2qw"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.054902, 0.0588235, 0.0784314, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[resource]
+default_font = ExtResource("1_6ul0q")
+default_font_size = 48
+Button/styles/normal = ExtResource("1_sf3oy")
+Control/styles/StyleboxFlat = SubResource("StyleBoxFlat_x68ot")
+Panel/styles/panel = SubResource("StyleBoxFlat_ac2qw")
+RichTextLabel/colors/default_color = Color(0.363744, 0.443079, 0.391499, 1)

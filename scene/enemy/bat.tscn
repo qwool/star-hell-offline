@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://fena6tkm1v08"]
+
+[ext_resource type="Script" path="res://scene/enemy/bat.gd" id="1_4blqp"]
+[ext_resource type="Script" path="res://scene/enemy/enemy.gd" id="1_wrusq"]
+[ext_resource type="Texture2D" uid="uid://xbsx8qog6g8l" path="res://assets/bat.png" id="2_3sile"]
+[ext_resource type="Script" path="res://component/hp.gd" id="3_3aiiy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcrnx"]
+atlas = ExtResource("2_3sile")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6i77"]
+atlas = ExtResource("2_3sile")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ow7jb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcrnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6i77")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wahxc"]
+size = Vector2(32, 20)
+
+[node name="Bat" type="Area2D" groups=["damageable", "enemy"]]
+show_behind_parent = true
+visibility_layer = 2
+script = ExtResource("1_wrusq")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ow7jb")
+frame_progress = 0.447834
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wahxc")
+
+[node name="HP" type="Node2D" parent="."]
+script = ExtResource("3_3aiiy")
+max_hp = 30
+
+[node name="MobSpecific" type="Node2D" parent="."]
+script = ExtResource("1_4blqp")
+
+[connection signal="dead" from="HP" to="." method="_on_hp_dead"]

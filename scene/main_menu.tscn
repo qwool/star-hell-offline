@@ -1,0 +1,198 @@
+[gd_scene load_steps=11 format=3 uid="uid://0iww57hlwlta"]
+
+[ext_resource type="Script" path="res://scene/main_menu.gd" id="1_r08gh"]
+[ext_resource type="Texture2D" uid="uid://c8n7y8v18qq4q" path="res://assets/transparency.png" id="2_u7unt"]
+[ext_resource type="Texture2D" uid="uid://bgrta1nilh2iq" path="res://assets/leaves.png" id="3_y8pqn"]
+[ext_resource type="Texture2D" uid="uid://b3sqxmbit1qmg" path="res://assets/logo.png" id="4_2er03"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv1ja"]
+atlas = ExtResource("3_y8pqn")
+region = Rect2(64, 2.08165e-12, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_w56o0"]
+load_path = "res://.godot/imported/leaves.png-e3907a20bed23f625c77213e85cd6d0a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nk0kr"]
+atlas = SubResource("CompressedTexture2D_w56o0")
+region = Rect2(2.08165e-12, 2.08165e-12, 64, 64)
+
+[sub_resource type="Animation" id="Animation_h4g7g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tree1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1920, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tree2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1080, 2.08165e-12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(893, 492)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("logo:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(600, 56)]
+}
+
+[sub_resource type="Animation" id="Animation_82hvc"]
+resource_name = "init"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tree1:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1920, 2.08165e-12), Vector2(840, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tree2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1080, 2.08165e-12), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(893, 1180), Vector2(893, 700)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("logo:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(600, -600), Vector2(600, 56)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lpuhs"]
+_data = {
+"RESET": SubResource("Animation_h4g7g"),
+"init": SubResource("Animation_82hvc")
+}
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r08gh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 3
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+scale = Vector2(4, 4)
+texture = ExtResource("2_u7unt")
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 893.0
+offset_top = 492.0
+offset_right = 1027.0
+offset_bottom = 588.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(67, 48)
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "start//"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "leave//"
+
+[node name="tree1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1920.0
+offset_right = 3000.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_mv1ja")
+
+[node name="tree2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -1080.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_nk0kr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lpuhs")
+}
+
+[node name="logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 56.0
+offset_right = 1464.0
+offset_bottom = 488.0
+texture = ExtResource("4_2er03")
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

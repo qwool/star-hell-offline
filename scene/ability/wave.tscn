@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://ono2htaoluc1"]
+
+[ext_resource type="Script" path="res://scene/ability/wave.gd" id="1_31835"]
+[ext_resource type="Texture2D" uid="uid://t44xlwnrdk83" path="res://assets/tileset.png" id="2_tl2pa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkjlu"]
+atlas = ExtResource("2_tl2pa")
+region = Rect2(32, 32, 64, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jipva"]
+size = Vector2(20, 64)
+
+[sub_resource type="Animation" id="Animation_inhrg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gogvq"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(3, 3)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ftnf8"]
+_data = {
+"RESET": SubResource("Animation_inhrg"),
+"default": SubResource("Animation_gogvq")
+}
+
+[node name="Wave" type="Area2D"]
+script = ExtResource("1_31835")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -4.71239
+texture = SubResource("AtlasTexture_vkjlu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jipva")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ftnf8")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
